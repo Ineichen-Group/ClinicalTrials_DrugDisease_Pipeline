@@ -102,7 +102,7 @@ sbatch 4_run_normalize_parallel.sh drug ner_predicted_drugs
 sbatch 4_run_normalize_parallel.sh disease ner_predicted_conditions
 ```
 
-# Mege and clean
+# Merge and clean
 
 ```bash
 sbatch 5_run_mondo_clean_names.sh
@@ -125,7 +125,7 @@ sbatch 7_run_umls_map_to_parent.sh
 sbatch 8_run_mondo_map_to_parent.sh
 ```
 
-# Mege final
+# Merge final
 ```bash
 python 9_join_drug_disease_entities.py \
   --disease_csv "./data/linked_to_ontologies/mapped_clinical_data_disease_cleaned_with_mondo_parents.csv" \
