@@ -77,11 +77,11 @@ Then [.1_run_ner_drug_disease.sh](./1_run_ner_drug_disease.sh).
 
 # NER cleaning
 
-Total merged rows: 293,949
-Rows with at least one prediction: 282,260 (filtered out 11,689 rows with no predictions)
-Filled 19,063 empty pred_drug from AACT where intervention_types contains DRUG
-Saved 64,772 rows with empty pred_drug to: ./data/aact_with_ner_for_linking/rows_with_empty_pred_drug.csv
-Rows after filling pred_cond and dropping empty pred_drug: 217,488 (filled 23,857 pred_cond, dropped 64,772 rows with empty pred_drug)
+The script merges AACT clinical trial data with NER-extracted drug and condition entities. It combines predictions from multiple files, joins them to AACT records by nct_id, and creates merged drug and condition lists from both sources. 
+
+Rows without any predictions are removed, missing drug predictions are filled from AACT intervention names when the intervention type is a drug, and missing condition predictions are filled from AACT conditions when possible. 
+
+Rows still missing drug predictions are saved separately and excluded. The final cleaned dataset is then saved as a single CSV and optionally split into chunks for downstream processing.
 
 ```bash
 python 3_combine_aact_with_ner.py \
