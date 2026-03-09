@@ -325,7 +325,8 @@ def main():
     filled_pred_cond = int(fill_mask.sum())
     merged.loc[fill_mask, args.out_pred_cond_col] = merged.loc[fill_mask, args.out_aact_cond_col]
     
-
+    print(f"Filled {filled_pred_cond:,} empty pred_cond from AACT where pred_drug is not empty")
+    
     # 3) Drop remaining empty pred_drug
     drop_mask = merged[args.out_pred_drug_col].isna()
     dropped_empty_pred_drug = int(drop_mask.sum())
