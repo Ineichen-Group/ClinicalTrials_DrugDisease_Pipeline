@@ -70,9 +70,28 @@ WHERE s.study_type = 'INTERVENTIONAL';
 ```
 
 # NER inference
-First [./0_prepare_aact_texts.py](./0_prepare_aact_texts.py).
+### Step 0: Prepare AACT texts
 
-Then [.1_run_ner_drug_disease.sh](./1_run_ner_drug_disease.sh).
+Run: [./0_prepare_aact_texts.py](./0_prepare_aact_texts.py).
+
+This step prepares clinical trial texts for NER inference:
+- Combines study_official_title and brief_summary into a single Text field
+- Fills missing titles using brief_title
+- Removes duplicate entries
+- Splits the dataset into sequential chunks
+
+The output is a set of chunked CSV files (chunk_00.csv, chunk_01.csv, …), enabling parallel processing during inference.
+
+### Step 1: Download NER model and run NER inference
+Dwnlaod the model from [https://zenodo.org/records/19290637](https://zenodo.org/records/19290637). Place it locally, for example: MODEL_PATH="ner_model/michiyasunaga_biolinkbert/epochs_15_data_size_100_iter_4". Alternatively, update the MODEL_PATH variable in the inference script to match your setup.
+
+Run: [.1_run_ner_drug_disease.sh](./1_run_ner_drug_disease.sh).
+
+This script:
+- Processes each chunk in parallel (e.g., via SLURM array jobs)
+- Loads the fine-tuned BioLinkBERT NER model
+- Annotates drug and disease entities
+- Saves predictions as CSV files in the output directory
 
 
 # NER cleaning
