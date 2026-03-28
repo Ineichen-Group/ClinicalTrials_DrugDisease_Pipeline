@@ -96,6 +96,24 @@ python 3_combine_aact_with_ner.py \
 
 # Ontologies Linking
 
+
+Download the named entity linking resources from [https://zenodo.org/records/19287944](https://zenodo.org/records/19287944). These files contain precomputed ontology embeddings and mappings required for drug and disease normalization.
+
+After downloading, place them in the repository as follows:
+```
+data/
+  ├── mondo/
+  │   ├── embeddings/
+  │   ├── mondo_term_id_pairs.json
+  │   └── mondo_id_to_term_map.json
+  └── umls/
+      ├── embeddings/
+      ├── umls_term_id_pairs_combined.json
+      └── umls_id_to_term_map.json 
+```
+
+The path to the data (DATA_DIR) has to be adjusted in [./4_run_normalize_parallel.sh](./4_run_normalize_parallel.sh).
+
 ```bash
 sbatch 4_run_normalize_parallel.sh drug ner_predicted_drugs
 
