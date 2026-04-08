@@ -1,4 +1,17 @@
-# Load and Filter AACT
+# Drug–Disease Extraction and Linking from ClinicalTrials.gov (AACT)
+
+This project constructs a large-scale, ontology-linked dataset of drug–disease relationships derived from ClinicalTrials.gov data via the AACT (Aggregate Analysis of ClinicalTrials.gov) database.
+
+The pipeline integrates structured clinical trial records with natural language processing to extract drug and disease entities from study descriptions, normalize them to standardized biomedical ontologies (UMLS and MONDO), and produce harmonized drug–disease pairs suitable for downstream translational analyses.
+
+### What this pipeline does
+
+- Filters interventional, drug-relevant studies from AACT  
+- Extracts drug and disease entities using a BioLinkBERT-based NER model  
+- Cleans and harmonizes entity predictions with structured AACT fields  
+- Links entities to biomedical ontologies (UMLS for drugs, MONDO for diseases)  
+- Maps entities to parent concepts for improved aggregation  
+- Produces a standardized, analysis-ready dataset of drug–disease pairs  
 
 ## 1. Download AACT PostgreSQL Dump
 
